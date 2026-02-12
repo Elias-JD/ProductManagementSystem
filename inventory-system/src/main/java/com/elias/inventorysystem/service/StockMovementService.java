@@ -4,7 +4,6 @@ import com.elias.inventorysystem.exception.ResourceNotFoundException;
 import com.elias.inventorysystem.mapper.StockMovementMapper;
 import com.elias.inventorysystem.model.dto.request.StockMovementRequest;
 import com.elias.inventorysystem.model.dto.response.StockMovementResponse;
-import com.elias.inventorysystem.model.entity.MovementType;
 import com.elias.inventorysystem.model.entity.Product;
 import com.elias.inventorysystem.model.entity.StockMovement;
 import com.elias.inventorysystem.repository.ProductRepository;
@@ -53,8 +52,6 @@ public class StockMovementService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product Not Found with the id : " + request.productId()));
 
         product.updateStock(request.type(), request.quantity());
-
-//        productRepository.save(product);
 
         StockMovement stockMovement = stockMovementMapper.toStockMovement(request);
         stockMovement.setProduct(product);

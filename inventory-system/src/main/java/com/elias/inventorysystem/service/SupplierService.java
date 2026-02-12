@@ -5,7 +5,6 @@ import com.elias.inventorysystem.mapper.SupplierMapper;
 import com.elias.inventorysystem.model.dto.request.SupplierRequest;
 import com.elias.inventorysystem.model.dto.response.SupplierResponse;
 import com.elias.inventorysystem.model.entity.Supplier;
-import com.elias.inventorysystem.repository.ProductRepository;
 import com.elias.inventorysystem.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ public class SupplierService {
     private final SupplierRepository supplierRepository;
     private final SupplierMapper supplierMapper;
 
-    public SupplierService(SupplierRepository supplierRepository, SupplierMapper supplierMapper, ProductRepository productRepository) {
+    public SupplierService(SupplierRepository supplierRepository, SupplierMapper supplierMapper) {
         this.supplierRepository = supplierRepository;
         this.supplierMapper = supplierMapper;
     }
