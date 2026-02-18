@@ -1,5 +1,6 @@
 package com.elias.inventorysystem.service;
 
+import com.elias.inventorysystem.exception.ResourceInUseException;
 import com.elias.inventorysystem.exception.ResourceNotFoundException;
 import com.elias.inventorysystem.mapper.SupplierMapper;
 import com.elias.inventorysystem.model.dto.request.SupplierRequest;
@@ -62,6 +63,10 @@ public class SupplierService {
 
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Resource Not Found with the id : + id"));
+
+        if(!supplier.getProducts().isEmpty()){
+            throw new ResourceInUseException("You cannot remove suppliers with associated products.");
+        }
 
         supplierRepository.delete(supplier);
 

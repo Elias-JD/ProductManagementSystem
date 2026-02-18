@@ -1,5 +1,6 @@
 package com.elias.inventorysystem.service;
 
+import com.elias.inventorysystem.exception.ResourceInUseException;
 import com.elias.inventorysystem.exception.ResourceNotFoundException;
 import com.elias.inventorysystem.mapper.CategoryMapper;
 import com.elias.inventorysystem.model.dto.request.CategoryRequest;
@@ -59,6 +60,10 @@ public class CategoryService {
 
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Resource Not Found with the id : " + id));
+
+        if(!category.getProducts().isEmpty()){
+            throw new ResourceInUseException("You cannot remove categories with associated products.");
+        }
 
         categoryRepository.delete(category);
     }
