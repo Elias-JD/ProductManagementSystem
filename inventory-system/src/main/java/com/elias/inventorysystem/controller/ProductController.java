@@ -3,6 +3,7 @@ package com.elias.inventorysystem.controller;
 import com.elias.inventorysystem.model.dto.request.ProductRequest;
 import com.elias.inventorysystem.model.dto.response.ProductResponse;
 import com.elias.inventorysystem.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +31,14 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest productRequest) {
 
         return new ResponseEntity<>(this.productService.createProduct(productRequest), HttpStatus.CREATED);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> updateProductById(@PathVariable Long id, @RequestBody ProductRequest product) {
+    public ResponseEntity<ProductResponse> updateProductById(@PathVariable Long id, @Valid @RequestBody ProductRequest product) {
 
         return ResponseEntity.ok(this.productService.updateProduct(id, product));
     }

@@ -3,6 +3,7 @@ package com.elias.inventorysystem.controller;
 import com.elias.inventorysystem.model.dto.request.CategoryRequest;
 import com.elias.inventorysystem.model.dto.response.CategoryResponse;
 import com.elias.inventorysystem.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +31,14 @@ public class CategoryController {
     }
 
     @PostMapping()
-    public ResponseEntity<CategoryResponse> addCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<CategoryResponse> addCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
 
         return new ResponseEntity<>(this.categoryService.createCategory(categoryRequest), HttpStatus.CREATED);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> updateCategoryById(@PathVariable Long id, @RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<CategoryResponse> updateCategoryById(@PathVariable Long id, @Valid @RequestBody CategoryRequest categoryRequest) {
 
         return ResponseEntity.ok(this.categoryService.updateCategory(id, categoryRequest));
     }

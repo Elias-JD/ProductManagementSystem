@@ -3,6 +3,7 @@ package com.elias.inventorysystem.controller;
 import com.elias.inventorysystem.model.dto.request.StockMovementRequest;
 import com.elias.inventorysystem.model.dto.response.StockMovementResponse;
 import com.elias.inventorysystem.service.StockMovementService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class StockMovementController {
     }
 
     @PostMapping()
-    public ResponseEntity<StockMovementResponse> addStockMovement(@RequestBody StockMovementRequest stockMovementRequest) {
+    public ResponseEntity<StockMovementResponse> addStockMovement(@Valid @RequestBody StockMovementRequest stockMovementRequest) {
 
         return new ResponseEntity<>(this.stockMovementService.registerMovement(stockMovementRequest), HttpStatus.CREATED);
     }

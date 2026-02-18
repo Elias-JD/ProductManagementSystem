@@ -3,6 +3,7 @@ package com.elias.inventorysystem.controller;
 import com.elias.inventorysystem.model.dto.request.SupplierRequest;
 import com.elias.inventorysystem.model.dto.response.SupplierResponse;
 import com.elias.inventorysystem.service.SupplierService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +32,14 @@ public class SupplierController {
 
 
     @PostMapping()
-    public ResponseEntity<SupplierResponse> addSupplier(@RequestBody SupplierRequest supplierRequest) {
+    public ResponseEntity<SupplierResponse> addSupplier(@Valid @RequestBody SupplierRequest supplierRequest) {
 
         return new ResponseEntity<>(supplierService.createSupplier(supplierRequest), HttpStatus.CREATED);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierResponse> addSupplier(@PathVariable Long id, @RequestBody SupplierRequest supplierRequest) {
+    public ResponseEntity<SupplierResponse> addSupplier(@PathVariable Long id, @Valid @RequestBody SupplierRequest supplierRequest) {
 
         return ResponseEntity.ok(supplierService.updateSupplier(id, supplierRequest));
     }
